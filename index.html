@@ -1,0 +1,96 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Pipoca</title>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Pedido de Pipoca</h2>
+       <link rel="stylesheet" href="styles.css">
+    <style type="text/css">
+      body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        select,
+        input[type="radio"] {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+      </style>
+        <form id="popcornForm">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label>Tamanho da Pipoca:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="size" value="P" required> P</label>
+                <label><input type="radio" name="size" value="M" required> M</label>
+                <label><input type="radio" name="size" value="G" required> G</label>
+            </div>
+
+            <label for="payment">Forma de Pagamento:</label>
+            <select id="payment" name="payment" required>
+                <option value="">Selecione</option>
+                <option value="cartao">Cartão</option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="pix">Pix</option>
+            </select>
+
+            <button type="button" onclick="submitForm()">Enviar Pedido</button>
+        </form>
+    </div>
+</body>
+</html>
