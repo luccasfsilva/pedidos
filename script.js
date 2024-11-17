@@ -1,26 +1,29 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxQXUdw02IAeHTgCepwjwDh0IUAmS5baF4IJbuOhH7bDQjyfoHiyERPYcyxfZ86UkQ_ig/exec';
+function feedback(type) {
+    let message = "";
 
-        function submitForm() {
-            const name = document.getElementById('name').value;
-            const size = document.querySelector('input[name="size"]:checked').value;
-            const payment = document.getElementById('payment').value;
+    if (type === "positivo") {
+        message = "Obrigado pelo seu feedback positivo! 😊";
+    } else if (type === "neutro") {
+        message = "Obrigado pelo seu feedback! 😐";
+    } else if (type === "negativo") {
+        message = "Obrigado pelo seu feedback! Vamos melhorar. 😞";
+    }
 
-            if (name && size && payment) {
-                fetch(scriptURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({ 'name': name, 'size': size, 'payment': payment })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        alert('Pedido enviado com sucesso!');
-                    } else {
-                        alert('Falha ao enviar o pedido.');
-                    }
-                })
-                .catch(error => console.error('Erro:', error));
-            } else {
-                alert("Por favor, preencha todos os campos.");
-            }
+    document.getElementById("feedback-message").innerText = message;
+
+    // Envia o feedback para a planilha Google Sheets
+    const feedbackData = {
+        feedback: type
+    };
+
+    fetch("https://docs.google.com/spreadsheets/d/1kiES0tfwskJ1f2Mo9mXkf0XmZhcObs9ZsXobUJ8VFfQ/edit?hl=pt-br&gid=0#gid=0", {
+        method: "POST",
+        body: JSON.stringify(feedbackData),
+        headers: {
+            "Content-Type": "application/json"
         }
+    })
+    .then(response => response.text())
+    .then(data => console.log(data))
+    .catch(error => console.error("Erro ao enviar feedback:", error));
+}
