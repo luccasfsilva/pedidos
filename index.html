@@ -1,96 +1,62 @@
-<html lang="pt-br">
+
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedido de Pipoca</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido de Pipoca</title>
 </head>
 <body>
+  <form id="orderForm">
+    <label for="name">Nome:</label>
+    <input type="text" id="name" name="name" required>
 
-    <div class="form-container">
-        <h2>Pedido de Pipoca</h2>
-       <link rel="stylesheet" href="styles.css">
-    <style type="text/css">
-      body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f5f5f5;
-        }
+    <label for="size">Tamanho da Pipoca:</label>
+    <select id="size" name="size" required>
+      <option value="P">Pequena</option>
+      <option value="M">Média</option>
+      <option value="G">Grande</option>
+    </select>
+    
+     <label for="size">Pipocas:</label>
+    <select id="size" name="size" required>
+      <option value="P">Branca</option>
+      <option value="M">Mista</option>
+      <option value="G">Nutella</option>
+    </select>
 
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
+    <label for="payment">Forma de Pagamento:</label>
+    <select id="payment" name="payment" required>
+      <option value="Cartão">Cartão</option>
+      <option value="Dinheiro">Dinheiro</option>
+      <option value="Pix">Pix</option>
+    </select>
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
+    <button type="button" onclick="submitForm()">Enviar Pedido</button>
+  </form>
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-        }
+  <script>
+    function submitForm() {
+      const name = document.getElementById("name").value;
+      const size = document.getElementById("size").value;
+      const payment = document.getElementById("payment").value;
 
-        input[type="text"],
-        select,
-        input[type="radio"] {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .radio-group {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .form-container button:hover {
-            background-color: #45a049;
-        }
-      </style>
-        <form id="popcornForm">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label>Tamanho da Pipoca:</label>
-            <div class="radio-group">
-                <label><input type="radio" name="size" value="P" required> P</label>
-                <label><input type="radio" name="size" value="M" required> M</label>
-                <label><input type="radio" name="size" value="G" required> G</label>
-            </div>
-
-            <label for="payment">Forma de Pagamento:</label>
-            <select id="payment" name="payment" required>
-                <option value="">Selecione</option>
-                <option value="cartao">Cartão</option>
-                <option value="dinheiro">Dinheiro</option>
-                <option value="pix">Pix</option>
-            </select>
-
-            <button type="button" onclick="submitForm()">Enviar Pedido</button>
-        </form>
-    </div>
+      fetch("URL_DO_SEU_SCRIPT_WEB", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, size, payment }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          alert("Pedido enviado com sucesso!");
+        })
+        .catch(error => {
+          alert("Erro ao enviar o pedido.");
+          console.error("Erro:", error);
+        });
+    }
+  </script>
 </body>
 </html>
+
