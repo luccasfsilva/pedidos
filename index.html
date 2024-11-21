@@ -99,16 +99,16 @@
 
   <script>
     function submitForm() {
-      const name = document.getElementById("name").value;
-      const size = document.getElementById("size").value;
-      const payment = document.getElementById("payment").value;
+      const name = document.getElementById("nome").value;
+      const size = document.getElementById("tamanho").value;
+      const payment = document.getElementById("pagamento").value;
 
-      fetch("https://docs.google.com/spreadsheets/d/1kiES0tfwskJ1f2Mo9mXkf0XmZhcObs9ZsXobUJ8VFfQ/edit?hl=pt-br&gid=0#gid=0", {
+      fetch("https://script.google.com/macros/s/AKfycbz10lnniD5ZLXMuLtv-yULPOYYc0VYHpELeMvh4AVfvvaz9pWlHO1m9PB8KiM6Hp_AaSw/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, size, payment }),
+        body: JSON.stringify({ nome, tamanho, pagamento}),
       })
         .then(response => response.json())
         .then(data => {
